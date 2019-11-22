@@ -1,26 +1,13 @@
-'seaborn-notebook',
- '_classic_test',
- 'Solarize_Light2',
- 'seaborn-paper',
- 'seaborn-ticks',
- 'seaborn-dark',
- 'ggplot',
- 'dark_background',
- 'fivethirtyeight',
- 'grayscale',
- 'seaborn-muted',
- 'seaborn-white',
- 'seaborn',
- 'seaborn-darkgrid',
- 'seaborn-talk',
- 'seaborn-deep',
- 'fast',
- 'bmh',
- 'seaborn-dark-palette',
- 'tableau-colorblind10',
- 'seaborn-pastel',
- 'seaborn-poster',
- 'seaborn-colorblind',
- 'seaborn-whitegrid',
- 'seaborn-bright',
- 'classic']
+# left, bottom, width, height
+master = [1, 1, 1, 1]
+child0 = [master[0],master[1],master[2]*0.5,master[3]*0.5]
+child1 = [master[0],master[1]*1.5,master[2]*0.5,master[3]*0.5]
+child2 = [master[0]*1.5,master[1]*1.5,master[2]*0.5,master[3]*0.5]
+child3 = [master[0]*1.5,master[1],master[2]*0.5,master[3]*0.5]
+
+
+plt.axes(master)
+plt.axes(child0)
+plt.axes(child1)
+plt.axes(child2)
+plt.axes(child3)
