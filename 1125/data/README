@@ -114,12 +114,31 @@ u.data     -- The full u data set, 100000 ratings by 943 users on 1682 items.
 u.info     -- The number of users, items, and ratings in the u data set.
 
 u.item     -- Information about the items (movies); this is a tab separated
-              list of
-              movie id | movie title | release date | video release date |
-              IMDb URL | unknown | Action | Adventure | Animation |
-              Children's | Comedy | Crime | Documentary | Drama | Fantasy |
-              Film-Noir | Horror | Musical | Mystery | Romance | Sci-Fi |
-              Thriller | War | Western |
+0:'list of',
+1:'movie id',
+2:'movie title',
+3:'release date',
+4:'video release date',
+5:'IMDb URL',
+6:'unknown',
+7:'Action',
+8:'Adventure',
+9:'Animation',
+0:'Children's',
+0:'Comedy',
+0:'Crime',
+0:'Documentary',
+0:'Drama',
+0:'Fantasy',
+0:'Film-Noir',
+0:'Horror',
+0:'Musical',
+0:'Mystery',
+0:'Romance',
+0:'Sci-Fi',
+0:'Thriller',
+0:'War',
+0:'Western',
               The last 19 fields are the genres, a 1 indicates the movie
               is of that genre, a 0 indicates it is not; movies can be in
               several genres at once.
@@ -129,7 +148,15 @@ u.genre    -- A list of the genres.
 
 u.user     -- Demographic information about the users; this is a tab
               separated list of
-              user id | age | gender | occupation | zip code
+
+              {
+                0: 'user_id',
+                1: 'age',
+                2: 'gender',
+                3: 'occupation',
+                4: 'zip_code'
+              }
+
               The user ids are the ones used in the u.data data set.
 
 u.occupation -- A list of the occupations.
