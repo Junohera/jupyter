@@ -344,7 +344,20 @@ dropna()
 	concat
 		pd.concat([a,c], axis=1) # a와 c를 concatnate
 -------------------------------------------------------------
+default setting
+
+	import folium
+	import pandas as pd
+	import numpy as np
+	import matplotlib.pyplot as plt
+
+	plt.style.use('ggplot')
+	plt.rcParams['font.family'] = 'Noto Sans CJK JP'
+
 -------------------------------------------------------------
+pandas.wide_to_long(data)
+melt나오기전에 유일한 방법인데, 쓰기 어려움..., 형태를 완벽하게 맞춰야하는 번거로움.
+범용적으로는 melt를 이용하지만, 알고는 있으셈! 
 -------------------------------------------------------------
 -------------------------------------------------------------
 -------------------------------------------------------------
