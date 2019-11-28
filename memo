@@ -346,23 +346,76 @@ dropna()
 -------------------------------------------------------------
 default setting
 
-	import folium
-	import pandas as pd
-	import numpy as np
-	import matplotlib.pyplot as plt
+import folium
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
 
-	plt.style.use('ggplot')
-	plt.rcParams['font.family'] = 'Noto Sans CJK JP'
+plt.style.use('ggplot')
+plt.rcParams['font.family'] = 'Noto Sans CJK JP'
 
 -------------------------------------------------------------
 pandas.wide_to_long(data)
 melt나오기전에 유일한 방법인데, 쓰기 어려움..., 형태를 완벽하게 맞춰야하는 번거로움.
 범용적으로는 melt를 이용하지만, 알고는 있으셈! 
 -------------------------------------------------------------
+jupyter notebook theme
+pip install jupyterthemes
+
+available list	
+	jt - l
+
+set theme
+	jt - t ??
 -------------------------------------------------------------
+지도 벡터 표현방식 두가지
+in Web
+topo_json geo_json
 -------------------------------------------------------------
+from pprint import pprint
+pretty 
 -------------------------------------------------------------
+import time
+	시각
+
+현재시각
+timestamp :from 1970-01-01
+
+현재로컬시각
+localTime = time.localtime()
+
+	# 달로 접근`하기
+	localTime.tm_mon # dic
+	localTime[1]` # list
 -------------------------------------------------------------
+import calendar
+	달력 찍어주는애
+-------------------------------------------------------------
+import datetime
+	
+
+	import datetime
+
+	x = datetime.date(2019, 11, 27)
+
+	x.year # o
+	# x['year']  x
+	# x[0] x
+-------------------------------------------------------------
+인덱스 2개
+
+new_dat스.set_index(['Date', 'forecast']) # 동시에 2개 인덱스
+
+-------------------------------------------------------------
+stack (melt와 비슷, melt가 좀더 간편)
+	컬럼에 있는 값을 인덱스로 변경
+-------------------------------------------------------------
+stack과 unstack을 이용해서 원하는대로 구조변경가능
+
+-------------------------------------------------------------
+duplicated
+	중복체크
+	반대는 dropduplicated?
 -------------------------------------------------------------
 -------------------------------------------------------------
 -------------------------------------------------------------
