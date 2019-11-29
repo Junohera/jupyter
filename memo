@@ -449,8 +449,24 @@ with plt.xkcd():
 5.d
 
 -------------------------------------------------------------
+df['column'].value_counts()
+	해당 컬럼의 값 갯수 # df(DataFrame)의 column이란 컬럼의 값 갯수
 -------------------------------------------------------------
+DataFrame에서 
+	map
+		- only series
+		t['petal length (cm)'] = t['petal length (cm)'].map(lambda x:x+1) # map series에서만 사용 가능
+	apply
+		- series & DataFrame
+		- axis, reduce도 포함되어있음.
+		t['petal length (cm)'] = t['petal length (cm)'].apply(lambda x:x+1) # apply series&DataFrame 사용 가능
+	applymap
+		- only DataFrame
 -------------------------------------------------------------
+데이터범위 지정하고싶을때 사용
+	a = np.array([1,2,3,4,5,6,7])
+	np.clip(a, 2,5)  # 2 if 2>x elif 5<x 5, 2보다 작으면 2 5보다 크면 5(=fix range(2to5))
+	# array([2, 2, 3, 4, 5, 5, 5])
 -------------------------------------------------------------
 -------------------------------------------------------------
 -------------------------------------------------------------
