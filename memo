@@ -333,6 +333,8 @@ pandas 필수 세가지
 
 id_vars : 변경하지 않을 값
 -------------------------------------------------------------
+vars : instance가 가진 값
+-------------------------------------------------------------
 데이터 분석 기본 프로세스
 
 	1. import data
@@ -686,10 +688,11 @@ a = pd.DataFrame(data.data, columns=data.feature_names) # DataFrame Instance
 b = pd.DataFrame(data.target, columns=['target'])
 iris = pd.concat([a,b],axis=1) # data ready done
 -------------------------------------------------------------
-hold out - 
+hold out - train_test_split
 	가장 좋은 알고리즘을 찾기위한 
 	데이터의 공정성을 최대화.
 		no free lunch(데이터에 따라 성능차이가 있기때문에)
+
 
 crossValidation
 		데이터가 너무 적을경우,, 하나만 틀려도 성능차이에 큰 요인으로 다가오므로,,,
