@@ -945,7 +945,10 @@ ex) numpy포맷일 경우, reshape이나 flatten으로 ...
 그런 레이어가 중첩되면 될수록,
 곡선을 표현할수있게된다.
 -------------------------------------------------------------
-AND gate
+deepLearning base of base 
+lowest 
+
+- AND gate
 
 	w1x1 + w2x2 + b
 
@@ -955,7 +958,10 @@ AND gate
 	1  0 => 0 : w1 + b < 0
 	1  1 => 1 : w1 + w2 + b < 0
 
-OR gate
+- OR gate
+
+AND와 OR는 직선으로 표현할 수 있기때문에
+classification
 
 	x1 x2
 	0  0 => 0 : b < 0 
@@ -968,14 +974,124 @@ OR gate
 	w1 > 0.1 -> w1 = 0.2
 
 	0.2 + 0.2 + -0.1 > 0 
+
+
+
+- XOR gate
+
+퍼셉트론은 XOR를 못풀었다. 근데 무슨 인공지능이냐??라고
+공격을 당했으나, 선 2개를 이용해서 결국 품. 
+=> 중첩을 하게되면 직선뿐만 아니라 곡선으로 표현할 수 있고
+=> 그말은 더 복잡한 것도 표현이 가능해짐.
+=> 레이어가 많으면 많을수록 복잡한 것도 찾을 수가 있음.
+=> none LinearModel
+
+	x1 x2
+	0  0 => 0 : b < 0 
+	0  1 => 1 : w2 + b > 0
+	1  0 => 1 : w1 + b > 0
+	1  1 => 0 : w1 + w2 + b < 0
 	
 
-	
 -------------------------------------------------------------
+Sequencial Model
+	레이어들의 진행방향이 순차적인 모델
 -------------------------------------------------------------
+입력이 몇개 들어올지 모르니
+첫번째 레이어에는 반드시 입력값의 모양을 설정해주어야한다.
++ 기본적으로 1차원으로 변경해서 설정해야한다. 
 -------------------------------------------------------------
+deepLearning의 파라미터 수는
+모든 입력값에 바이어스갯수
+ex ) 28*28
+레이어2개면
+	(입력모양))*(레이어개수)) + (바이어스개수)
+	(28*28)*(2) + 2
+	28*28*2+2 
+	=> 1570
 -------------------------------------------------------------
+activation
+	다음 신경망으로 전달하는 방식
+	보통 'relu'
+
+	softmax - 랜덤으로 
+
+마지막 레이어(output layer)
+	activation 
 -------------------------------------------------------------
+Dense(
+    units,
+    activation=None,
+    use_bias=True,
+    kernel_initializer='glorot_uniform',
+    bias_initializer='zeros',
+    kernel_regularizer=None,
+    bias_regularizer=None,
+    activity_regularizer=None,
+    kernel_constraint=None,
+    bias_constraint=None,
+    **kwargs,
+)
+-------------------------------------------------------------
+model.compile(
+    optimizer='rmsprop',	# 미분방식
+    loss=None,				# 최소화
+    metrics=None,
+    loss_weights=None,
+    sample_weight_mode=None,
+    weighted_metrics=None,
+    target_tensors=None,
+    distribute=None,
+    **kwargs,
+)
+-------------------------------------------------------------
+model.fit(
+    x=None,					# x_train
+    y=None,					# y_train
+    batch_size=None,
+    epochs=1,				# 학습횟수
+    verbose=1,
+    callbacks=None,
+    validation_split=0.0,
+    validation_data=None,
+    shuffle=True,
+    class_weight=None,
+    sample_weight=None,
+    initial_epoch=0,
+    steps_per_epoch=None,
+    validation_steps=None,
+    validation_freq=1,
+    max_queue_size=10,
+    workers=1,
+    use_multiprocessing=False,
+    **kwargs,
+)
+-------------------------------------------------------------
+sklearn
+MLPClassifier(
+    hidden_layer_sizes=(100,),		# mlp = MLPClassifier((3,2,4)) ==> 첫번째는 3개, 두번째는 2개, 세번째는 4개
+    activation='relu',
+    solver='adam',		# 기계학습의 목적: 실제값과 예측값이 최소화하는 것 ==> 미분 방식
+    alpha=0.0001,
+    batch_size='auto',
+    learning_rate='constant',
+    learning_rate_init=0.001,
+    power_t=0.5,
+    max_iter=200,
+    shuffle=True,
+    random_state=None,
+    tol=0.0001,
+    verbose=False,
+    warm_start=False,
+    momentum=0.9,
+    nesterovs_momentum=True,
+    early_stopping=False,
+    validation_fraction=0.1,
+    beta_1=0.9,
+    beta_2=0.999,
+    epsilon=1e-08,
+    n_iter_no_change=10,
+)
 -------------------------------------------------------------
 -------------------------------------------------------------
 -------------------------------------------------------------
