@@ -137,9 +137,9 @@ a = a.reshape(2, -1) # 모든 음수값은 가능하나 관례상 -1
   
 5. squeeze - 차원 축소
 
-6. expand_dims - 차원 확대
+6. expand_dims - 차원 확대, 차원확장
 
-7. newaxis - 
+7. newaxis - 차원확장, 차원 확대
 -------------------------------------------------------------
 strides를 변경해도 가능
 -------------------------------------------------------------
@@ -1129,11 +1129,116 @@ batch_size batch_size만큼만 보고나서 업데이트하지않고,
 back propagation 
 	뒤에서 앞으로 찾는방식?
 	gradient 
+
 -------------------------------------------------------------
+다른 모델 가져다쓰기.
+
+1. tensorflow hub는 이미 만들어진 모델을 갖다쓰는것.
+pip install tensorflow-hub || pip install tf-hub
+# 버전차이로 명칭이 다를수도있음.
+사용하기 편한대신 커스터마이징불가능.
+
+
 -------------------------------------------------------------
+Convolutional Neural Network 합성곱 신경망
+
+고유의 특성뽑기
+특징찾기
+
+Fully Connected Layer1 만으로 구성된 인공 신경망의 입력 데이터는 1차원(배열) 형태로 한정.
+한 장의 컬러 사진은 3차원 데이터. 
+배치 모드에 사용되는 여러장의 사진은 4차원 데이터.
+사진 데이터로 전연결(FC, Fully Connected) 신경망을 학습시켜야 할 경우에, 
+3차원 사진 데이터를 1차원으로 평면화시켜야 함.
+그러다보니 사진 데이터를 평면화 시키는 과정에서 공간 정보가 손실될 수밖에 없음.
+결과적으로 
+	이미지 공간 정보 유실로 인한 정보 부족으로 인공 신경망이 특징을 추출 및 학습이 비효율적이고 정확도를 높이는데 한계가 있습니다. 
+	이미지의 공간 정보를 유지한 상태로 학습이 가능한 모델이 바로 CNN(Convolutional Neural Network)입니다.
+
+Fully Connected
+
+예측하는것. 예측
 -------------------------------------------------------------
+transfer learning
+기존의 만들어진 모델을 사용하여 새로운 모델을 만들시 학습을 빠르게 하며, 예측을 더 높이는 방법
+
+왜 사용하나?
+
+    실질적으로 Convolution network을 처음부터 학습시키는 일은 많지 않음. 
+		대부분의 문제는 이미 학습된 모델을 사용해서 문제를 해결할 수 있습니다.
+    복잡한 모델일수록 학습시키기 어렵습니다. 
+		어떤 모델은 2주정도 걸릴수 있으며, 비싼 GPU 여러대를 사용하기도 합니다.
+    layers의 갯수, activation, hyper parameters등등 고려해야 할 사항들이 많으며, 
+		실질적으로 처음부터 학습시키려면 많은 시도가 필요합니다.
+
+=> 결론적으로 이미 잘 훈련된 모델이 있고, 특히 해당 모델과 유사한 문제를 해결시 transfer learining을 사용
+
+여기에 커스터마이징을 하여 사용 == transferLearning
+
+그러려면 기본적으로 커스터마이징하려면
+
+	1. 레이어 개수확인하기.
+		len(model.layers)
+	2. 레이어 제거하기.
+		mo = Sequential(mobile1.layers[:-3]) # 뒤의 세개 제거
+	3. 레이어 추가하기.
+		mo.add()
+가 선행되어야한다.
+
+그리고 이미 갖고있는 학습가능한 것들은 재학습시킬필요없음.
+==> 추가로 학습할 데이터만 학습시키기위해 이미 갖고있는 학습가능한 파람을 제거
+
 -------------------------------------------------------------
+keras를 통해 임의의 이미지 불러오기
+
+import numpy as np
+import PIL.Image as Image
+
+# tf.keras.utils.get_file(${파일명}, ${url})
+
+# 이미지불러오는방법 1
+grace_hopper = tf.keras.utils.get_file('%ED%94%BC%EC%B9%B4%EC%B8%84.jpg','https://post-phinf.pstatic.net/MjAxNzEyMTNfMjIx/MDAxNTEzMTI1MDYwNTUw.Q6LO7KVPRttYT6Y8eSCkMUSjxvXW9IWMSVCQmWVwOwAg.g6zfoPUlOJfSXTcja4bKgesJyYakdIEehHTAW1rrnogg.JPEG/%ED%94%BC%EC%B9%B4%EC%B8%84.jpg?type=w1200')
+grace_hopper = Image.open(grace_hopper).resize(IMAGE_SHAPE)
+grace_hopper
+
+# 이미지불러오는방법 2
+x = tf.keras.preprocessing.image.load_img('/home/ai39/jupyter/1219/chu.jpg', target_size=(224,224))
 -------------------------------------------------------------
+# image convert to numpyFormat
+
+# 이미지포맷을 numpy포맷으로 변경하기 1
+t = tf.keras.preprocessing.image.img_to_array(x)
+
+# 이미지포맷을 numpy포맷으로 변경하기 2 
+s = np.array(x)
+
+# 이미지포맷을 numpy포맷으로 변경하기 3
+
+
+-------------------------------------------------------------
+import numpy as np
+np.argmax(s)
+
+입력값중에서 가장 큰값의 인덱스반환하는 함수
+input : numpyFormat
+output : the largest of input's index
+-------------------------------------------------------------
+# 새로운 이미지불러와서 학습결과 확인하기
+
+# 1. load image
+image2 = tf.keras.preprocessing.image.load_img('/home/ai39/jupyter/1219/pocketmon.gif', target_size=(224,224))
+
+# 2. convert format, imageFormat to numpyFormat
+t = tf.keras.preprocessing.image.img_to_array(image2)
+
+# 3. sync Format by newAxis
+trainData = np.array(t)
+
+# 4 . predict
+model.predict(trainData)
+-------------------------------------------------------------
+레이어 개수 확인
+len(model.layers)
 -------------------------------------------------------------
 -------------------------------------------------------------
 -------------------------------------------------------------
