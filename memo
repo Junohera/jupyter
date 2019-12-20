@@ -1107,6 +1107,9 @@ MLPClassifier(
 		)
 		class [multi, bi]
 		rense
+
+		sparse
+			1. 원핫인코딩안되있을때,
 3. compile
 
 optimizer loss function을 최적화시키는 방법
@@ -1247,9 +1250,58 @@ len(model.layers)
 import tensorflow_datasets as tfds
 
 -------------------------------------------------------------
+multi input multi output일 경우,
+Sequencial사용하지못함.
+
+multi input multi output 확인법
+summary()에서 우측에 Connected to가 있음?
+Model: "mobilenetv2_1.00_224"
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
 -------------------------------------------------------------
+합성함수가 곧 인풋넣고 액티베이션통과하고 다음넘어가는 과정과 평행
+==> functional
+
+이론과 코딩이 비슷해지는 것으로 인한 장점
+형식적 증명 가능성
+이론적인 장점은 함수형 프로그램이 정확하다는 수학적 증명을 만드는 것이 더 쉽다.
+
+==> functional API
+사용할 수 있는 문법적 이유 : __call__로 인해 인스턴스와 동시에 기존에 모델세팅하던 행위를 하면서 다음레이어로 바로 진행가능.
+
+# 전문가용을 하기위한 개념 __call__ 이란? instance도 동일하게 된것
+
+1. 문법적 확인
+class B:
+    def __call__(self):
+        print('aaa')
+
+x = B()
+# result : 'aaa'
+x = B()()
+# result : 'aaa'
+
+2. 실제 모델 세팅시에 적용하면?
+
+input = Input(shape=(784,))
+layers1 = Dense(64, activation='relu')(inputs)
+layers2 = Dense(64, activation='relu')(layers1)
+output = Dense(10, activation='softmax')(layers2)
+
+# total =  Dense(10, activation='softmax')(layers2)(layers1)
 -------------------------------------------------------------
+리스코프의 치환원칙
+
+override할수있는 근거
 -------------------------------------------------------------
+tensorflow특징 numpy와 다르게
+
+cast
+gpu사용가능
+immutable
+
+
 -------------------------------------------------------------
 -------------------------------------------------------------
 -------------------------------------------------------------
