@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ['_GeneratorState',
  '__abstractmethods__',
  '__class__',
@@ -109,3 +110,13 @@
  'window',
  'with_options',
  'zip']
+=======
+# 한글적용하기
+import matplotlib
+폰트리스트 확인
+	fm = matplotlib.font_manager.FontManager()
+	# fm.ttflist # 현재 컴퓨터에서 사용가능한 폰트리스트 확인
+	# <Font 'Noto Sans CJK JP' (NotoSansCJK-Thin.ttc) normal normal 400 normal>
+폰트 적용
+	plt.rcParams['font.family'] = 'Noto Sans CJK JP' # 한글 지원하는 폰트로 설정
+>>>>>>> dcd2f934a797e409eb21bde6d67053694b1191a8
