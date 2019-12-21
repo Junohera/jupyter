@@ -1303,7 +1303,45 @@ immutable
 
 
 -------------------------------------------------------------
+Neural Style transfer
+
 -------------------------------------------------------------
+numpy와
+1.cpu
+2.immutable
+3.
+
+tensor의 차이
+1.gpu
+2.
+
+변환과정시 시간이 오래걸리므로,
+처음부터 tensor로 불러오는게 이득.(if tensorflow)
+
 -------------------------------------------------------------
+from tensorflow.keras.applications import
 -------------------------------------------------------------
+from tensorflow.keras.applications import VGG19
+vg = VGG19(include_top = False)
+인스턴스시
+Convolution(특징만 가져오는것)만 하므로 include_top = False
+예측까지 할경우 fullyconnect해야하므로 include_top = True
+
+-------------------------------------------------------------
+feature extraction 특징 추출
+
+-------------------------------------------------------------
+자동미분 (최적의 Weight와 bias를 찾는것)
+
+자동으로 모델만들어주고 weight 업데이트해주는것.
+
+loss functino이 정해지지않았을 경우,
+custom loss function(사용자 정의 로스함수)
+
+==> 
+로스가 복잡하면 fit을 사용하지 못하므로,
+직접 fit을 만들어야함
+gradient tape로 사용해야함.
+
+
 -------------------------------------------------------------
