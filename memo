@@ -692,7 +692,9 @@ a = pd.DataFrame(data.data, columns=data.feature_names) # DataFrame Instance
 b = pd.DataFrame(data.target, columns=['target'])
 iris = pd.concat([a,b],axis=1) # data ready done
 -------------------------------------------------------------
-hold out - train_test_split
+hold out - 
+
+train_test_split
 	가장 좋은 알고리즘을 찾기위한 
 	데이터의 공정성을 최대화.
 		no free lunch(데이터에 따라 성능차이가 있기때문에)
@@ -1350,7 +1352,33 @@ pipeline 여러가지 동시에할때 좋음.
 keras와 sklearn 서로 호환이 가능하므로,
 sklearn에서 사용한 pipeline을 tensorflow에서도 사용이 가능함.
 
+
+
+tips데이터 labelencoding해보기 (labelencoding technic)
+
+	import seaborn as sns
+
+	tips = sns.load_dataset('tips')
+
+	# tips
+
+	# category를 캐스팅 --> labelEncoding
+	def convert_label_encoding(dataDummy, columnsName):
+		dataDummy[columnsName] = pd.Categorical(dataDummy[columnsName])
+		dataDummy[columnsName] = dataDummy[columnsName].cat.codes
+		dataDummy[columnsName] = dataDummy[columnsName].astype('category')
+		return dataDummy[columnsName]
+
+	for i in ['sex', 'smoker', 'day', 'time']:
+		tips[i] = convert_label_encoding(tips, i)
+		
+	tips
 -------------------------------------------------------------
+dataset = tf.data.Dataset.from_tensor_slices((df.values, target.values)) # numpyFormat convert tensorFormat 기법
 -------------------------------------------------------------
+feature columns
+
+	pipeline
+		tensorflow.keras로 쓰는 pipeline
 -------------------------------------------------------------
 -------------------------------------------------------------
