@@ -1,27 +1,19 @@
-['__builtins__',
- '__cached__',
- '__doc__',
- '__file__',
- '__loader__',
- '__name__',
- '__package__',
- '__path__',
- '__spec__',
- '_sys',
- 'bucketized_column',
- 'categorical_column_with_hash_bucket',
- 'categorical_column_with_identity',
- 'categorical_column_with_vocabulary_file',
- 'categorical_column_with_vocabulary_list',
- 'crossed_column',
- 'embedding_column',
- 'indicator_column',
- 'make_parse_example_spec',
- 'numeric_column',
- 'sequence_categorical_column_with_hash_bucket',
- 'sequence_categorical_column_with_identity',
- 'sequence_categorical_column_with_vocabulary_file',
- 'sequence_categorical_column_with_vocabulary_list',
- 'sequence_numeric_column',
- 'shared_embeddings',
- 'weighted_categorical_column']
+model = Sequential()
+
+layer1 = Dense(64, input_shape=(28*28,),activation='relu')
+layer2 = Dense(64, activation = 'relu')
+layer3 = Dense(64, activation = 'relu')
+layer4 = Dense(64, activation = 'relu')
+layer5 = Dense(10, activation = 'softmax')
+
+model.add(layer1);
+model.add(layer2);
+model.add(layer3);
+model.add(layer4);
+model.add(layer5);
+
+model.summary()
+
+model.compile(loss='sparse_categorical_crossentropy', optimizer='adam')
+
+model.fit(X_train, y_train, epochs=10)
